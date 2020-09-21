@@ -13,6 +13,14 @@ public class KeyValuePair {
         this.value = value;
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -26,4 +34,6 @@ public class KeyValuePair {
     public int hashCode() {
         return Objects.hash(key, value);
     }
+
+
 }

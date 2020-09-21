@@ -27,11 +27,37 @@ public class ArgsTest {
         String argsText="-l true -p 8080 -d /usr/logs";
         Args args=new Args(argsText);
         //when
-        List<KeyValuePair> keyValuePair=args.keyValueScan();
+        List<String> keyValues=args.scan();
+        List<KeyValuePair> keyValuePair=args.keyValueScan(keyValues);
         //then
         assertEquals(3,keyValuePair.size());
         assertTrue(keyValuePair.contains(new KeyValuePair("l","true")));
         assertTrue(keyValuePair.contains(new KeyValuePair("p","8080")));
         assertTrue(keyValuePair.contains(new KeyValuePair("d","/usr/logs")));
+    }
+
+    @Test
+    public void should_return_true_list_when__given_l() {
+        //given
+        String argsText="-l true -p 8080 -d /usr/logs";
+        Args args=new Args(argsText);
+        //when
+        List<KeyValuePair> keyValuePair=args.keyValueScan(args.scan());
+        //then
+        assertEquals(3,keyValuePair.size());
+        assertTrue(keyValuePair.contains(new KeyValuePair("l","true")));
+        assertTrue(keyValuePair.contains(new KeyValuePair("p","8080")));
+        assertTrue(keyValuePair.contains(new KeyValuePair("d","/usr/logs")));
+    }
+
+    @Test
+    public void should_return_boolean_true_when_given_l() {
+        //given
+        String argsText="-l true -p 8080 -d /usr/logs";
+        Args args=new Args(argsText);
+        //when
+        Object value=args.getValueOf("l");
+        //then
+        assertEquals(true,value);
     }
 }
