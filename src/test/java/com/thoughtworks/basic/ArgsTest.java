@@ -60,4 +60,14 @@ public class ArgsTest {
         //then
         assertEquals(true,value);
     }
+    @Test
+    public void should_return_integer_8080_when_given_p() {
+        //given
+        String argsText="-l true -p 8080 -d /usr/logs";
+        Args args=new Args(argsText);
+        //when
+        Object value=args.getValueOf("p");
+        //then
+        assertEquals(8080,value);
+    }
 }
