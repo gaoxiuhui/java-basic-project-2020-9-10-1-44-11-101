@@ -115,4 +115,14 @@ public class ArgsTest {
         List<String> keyValues=args.scan();
         //then  抛出错误 ：-后面必须是l/p/d
     }
+
+    @Test
+    public void should_return_error_when_scan_given_error_string() {
+        //given
+        String argsText="- true -p 8080 -d /usr/logs";
+        Args args=new Args(argsText);
+        //when
+        List<String> keyValues=args.scan();
+        //then  抛出错误 ：-后面必须是l/p/d
+    }
 }
