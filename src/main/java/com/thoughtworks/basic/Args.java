@@ -17,11 +17,18 @@ public class Args {
     }
 
     public List<String> scan() {
-        List<String> keyValues=Arrays.asList(argsText.split("-"));
-        keyValues=keyValues.stream()
-                .map(String::trim)
-                .collect(Collectors.toList());
-        return keyValues.subList(1,keyValues.size());
+        try {
+            if (checkArgsText(argsText)) {
+                List<String> keyValues = Arrays.asList(argsText.split("-"));
+                keyValues = keyValues.stream()
+                        .map(String::trim)
+                        .collect(Collectors.toList());
+                return keyValues.subList(1, keyValues.size());
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public List<KeyValuePair> keyValueScan(List<String> keyValues) {
@@ -88,5 +95,19 @@ public class Args {
                 return "";
         }
         return null;
+    }
+
+    public boolean checkArgsText(String text)throws Exception {
+        int lastIndex=text.length();
+        for(int index=0;index<lastIndex;index++){
+          if(index!=lastIndex-1
+                  && text.charAt(index)== '-'
+                  && text.charAt(index+1)!= 'l'
+                  && text.charAt(index+1)!= 'p'
+                  && text.charAt(index+1)!= 'd' ){
+              throw new Exception("-后面必须是符合规定的Flag（p/d/l）");
+          }
+         }
+        return true;
     }
 }

@@ -105,4 +105,14 @@ public class ArgsTest {
         assertTrue(keyValuePair.contains(new KeyValuePair("l","false")));
         assertTrue(keyValuePair.contains(new KeyValuePair("d","/usr/logs")));
     }
+
+    @Test
+    public void should_return_error_list_when_scan_given_error_string() {
+        //given
+        String argsText="-q true -p 8080 -d /usr/logs";
+        Args args=new Args(argsText);
+        //when
+        List<String> keyValues=args.scan();
+        //then  抛出错误 ：-后面必须是l/p/d
+    }
 }
