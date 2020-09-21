@@ -14,4 +14,5 @@ public class FlagSchema {
     public Object getType(){
         return type;
     }
+
 }

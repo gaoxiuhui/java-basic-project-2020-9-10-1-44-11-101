@@ -30,7 +30,13 @@ public class Args {
             try{
             String[] splitKeyValue=keyValue.split(" ");
             String key=splitKeyValue[0];
-            String value=splitKeyValue[1];
+            String value = "";
+            if(keyValue.split(" ").length > 1){
+                    value = splitKeyValue[1];
+            }else{
+                    value = getDefaultValue(key).toString();
+            }
+
             checkFlag(keyValuePairs,key);
             keyValuePairs.add(new KeyValuePair(key,value));}
             catch(Exception e){
@@ -70,5 +76,17 @@ public class Args {
                 throw new Exception("输入的Flag重复");
             }
         }
+    }
+
+    public Object getDefaultValue(String flag){
+        switch(flag){
+            case "l":
+                return String.valueOf(false);
+            case "p":
+                return String.valueOf(0);
+            case "d":
+                return "";
+        }
+        return null;
     }
 }

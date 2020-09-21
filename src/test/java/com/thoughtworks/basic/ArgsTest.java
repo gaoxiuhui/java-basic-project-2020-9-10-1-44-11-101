@@ -91,4 +91,18 @@ public class ArgsTest {
         List<KeyValuePair> keyValuePair=args.keyValueScan(keyValues);
         //then  会抛出错误
     }
+
+    @Test
+    public void should_return_default_list_when_keyValuesScan_given_l_null() {
+        //given
+        String argsText="-l -d /usr/logs";
+        Args args=new Args(argsText);
+        //when
+        List<String> keyValues=args.scan();
+        List<KeyValuePair> keyValuePair=args.keyValueScan(keyValues);
+        //then
+        assertEquals(2,keyValuePair.size());
+        assertTrue(keyValuePair.contains(new KeyValuePair("l","false")));
+        assertTrue(keyValuePair.contains(new KeyValuePair("d","/usr/logs")));
+    }
 }
