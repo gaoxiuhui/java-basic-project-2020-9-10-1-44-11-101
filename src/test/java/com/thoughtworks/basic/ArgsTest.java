@@ -80,4 +80,15 @@ public class ArgsTest {
         //then
         assertEquals("/usr/logs",value);
     }
+
+    @Test
+    public void should_return_error_list_when_keyValuesScan_given_two_l() {
+        //given
+        String argsText="-l true -l true -d /usr/logs";
+        Args args=new Args(argsText);
+        //when
+        List<String> keyValues=args.scan();
+        List<KeyValuePair> keyValuePair=args.keyValueScan(keyValues);
+        //then  会抛出错误
+    }
 }

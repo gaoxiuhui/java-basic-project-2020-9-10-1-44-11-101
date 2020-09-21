@@ -27,10 +27,15 @@ public class Args {
     public List<KeyValuePair> keyValueScan(List<String> keyValues) {
         List<KeyValuePair> keyValuePairs=new ArrayList<>();
         keyValues.forEach(keyValue ->{
+            try{
             String[] splitKeyValue=keyValue.split(" ");
             String key=splitKeyValue[0];
             String value=splitKeyValue[1];
-            keyValuePairs.add(new KeyValuePair(key,value));
+            checkFlag(keyValuePairs,key);
+            keyValuePairs.add(new KeyValuePair(key,value));}
+            catch(Exception e){
+                e.printStackTrace();
+            }
         });
         return keyValuePairs;
     }
@@ -57,5 +62,13 @@ public class Args {
             return String.valueOf(value);
         }
         return null;
+    }
+
+    public void checkFlag(List<KeyValuePair> keyValuePairs,String key) throws Exception {
+        for(KeyValuePair keyValuePair : keyValuePairs){
+            if(keyValuePair.getKey().equals(key)){
+                throw new Exception("输入的Flag重复");
+            }
+        }
     }
 }
