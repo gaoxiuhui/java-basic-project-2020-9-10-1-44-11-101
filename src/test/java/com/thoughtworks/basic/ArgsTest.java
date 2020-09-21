@@ -70,4 +70,14 @@ public class ArgsTest {
         //then
         assertEquals(8080,value);
     }
+    @Test
+    public void should_return_String_when_given_d() {
+        //given
+        String argsText="-l true -p 8080 -d /usr/logs";
+        Args args=new Args(argsText);
+        //when
+        Object value=args.getValueOf("d");
+        //then
+        assertEquals("/usr/logs",value);
+    }
 }
